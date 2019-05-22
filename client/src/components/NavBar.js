@@ -9,7 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { purple } from '@material-ui/core/colors';
+import { Link } from 'react-router-dom';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 const styles = {
   root: {
@@ -50,7 +51,7 @@ class ButtonAppBar extends React.Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               Camagru
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Link to="/login" style={{ textDecoration: 'none' , color: 'white'}}><Button color="inherit"><AccountCircle /></Button></Link>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -64,10 +65,10 @@ class ButtonAppBar extends React.Component {
             </IconButton>
           </div>
           <div className={classes.drawerInner}>
-            <Button variant="h6" color="purple">Home</Button>
-            <Typography variant="h6"><Button variant="h6" color="purple">Home</Button></Typography>
-            <Typography variant="h6"><Button variant="h6" color="purple">Home</Button></Typography>
-            <Typography variant="h6"><Button variant="h6" color="purple">Home</Button></Typography>
+            <Link to="/"><Button onClick={this.handleDrawerClose} variant="h6" color="purple">Home</Button></Link>
+            <Link to="/main"><Typography variant="h6"><Button onClick={this.handleDrawerClose} variant="h6" color="purple">Camera</Button></Typography></Link>
+            <Link to="/gallery"><Typography variant="h6"><Button onClick={this.handleDrawerClose} variant="h6" color="primary">Gallery</Button></Typography></Link>
+            <Link to="/show"><Typography variant="h6"><Button onClick={this.handleDrawerClose} variant="h6" color="purple">Show</Button></Typography></Link>
           </div>
         </Drawer>
       </div>

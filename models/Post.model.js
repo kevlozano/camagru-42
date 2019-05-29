@@ -3,10 +3,9 @@ const Schema = mongoose.Schema;
 
 let PostSchema = new Schema({
     created: {type: Date, default: Date.now},
-    media: {type: String},
-    username: {type: mongoose.Types.ObjectId, ref: "User"},
-    likes: {type: Number, default: 0},
-    comments: [{type: mongoose.Types.ObjectId, ref: "Comment"}],
+    media: {type: Buffer},
+    userId: {type: mongoose.Types.ObjectId, ref: "User"},
+    likes: [{type: Schema.Types.ObjectId, default: '[]'}],
 })
 
 module.exports = mongoose.model('Post', PostSchema);

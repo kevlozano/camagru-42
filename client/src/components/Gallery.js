@@ -5,6 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import filter1 from './resources/filter1.png'
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 // api call need to be added
 
@@ -20,48 +21,67 @@ const styles = theme => ({
   },
 });
 
-function Gallery(props) {
-  const { classes } = props;
+class Gallery extends React.Component {
+  
+  //understand how to pull up the data and check if im storing it correctly
+  componentDidMount() {
+    axios.get('http://localhost:4000/posts/gallery')
+    .then(function(response) {
+      console.log(response.data[0].media.data);
+      let imgData = response.data[0].media.data;
+      console.log(imgData);
+      let decodedImg = atob(imgData);
+      var myImage = new Image();
+      myImage.src = decodedImg;
+      console.log(myImage);
 
-  return (
-    <div className="Gallery">
-      <div className={classes.root}>
-        <Grid container spacing={24}>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}><img src={filter1}></img></Paper>
+    })
+    .catch(function(err){
+      console.log(err);
+    });
+  }
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className="Gallery">
+        <div className={classes.root}>
+          <Grid container spacing={24}>
+            <Grid item xs={12} sm={6}>
+              <Paper className={classes.paper}><img src={filter1}></img></Paper>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper className={classes.paper}>xs=12</Paper>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper className={classes.paper}>xs=12</Paper>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper className={classes.paper}>xs=12</Paper>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper className={classes.paper}>xs=12</Paper>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper className={classes.paper}>xs=12</Paper>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper className={classes.paper}>xs=12</Paper>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper className={classes.paper}>xs=12</Paper>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper className={classes.paper}>xs=12</Paper>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper className={classes.paper}>xs=12</Paper>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>xs=12</Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>xs=12</Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>xs=12</Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>xs=12</Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>xs=12</Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>xs=12</Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>xs=12</Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>xs=12</Paper>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>xs=12</Paper>
-          </Grid>
-        </Grid>
+        </div>
+        <Button className="btnGrid" variant="contained" color="primary">more</Button>
       </div>
-      <Button className="btnGrid" variant="contained" color="primary">more</Button>
-    </div>
-  );
+    );
+  }
 }
 
 Gallery.propTypes = {

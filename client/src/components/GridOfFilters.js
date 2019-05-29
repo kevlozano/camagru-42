@@ -1,5 +1,5 @@
 import React from 'react';
-import FilterPicture from './FilterPicutre';
+import FilterPicture from './FilterPicture';
 import filter1 from './resources/filter1.png'
 import filter2 from './resources/filter2.png'
 import filter3 from './resources/filter3.png'

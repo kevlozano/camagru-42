@@ -1,5 +1,4 @@
 import React from 'react';
-import Filter from './Filter.js';
 
 class Camera extends React.Component {
   startVideo = () => {
@@ -25,7 +24,7 @@ class Camera extends React.Component {
   render() {
     return (
       <div width="100%" className="video">
-        {this.props.isVideoOn ? <video id="video" width="100%" autoplay></video> : <img className="uploadedImg" src={this.props.src}></img>}
+        {this.props.isVideoOn ? <video id="video" width="100%" autoPlay></video> : <img alt="image uploaded" className="uploadedImg" src={this.props.src}></img>}
       </div>
     );
   }

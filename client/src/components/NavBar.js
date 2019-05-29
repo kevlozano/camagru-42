@@ -27,8 +27,11 @@ const styles = {
 
 
 class ButtonAppBar extends React.Component {
-  state = {
-    drawerIsOpen: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      drawerIsOpen: false
+    }
   }
 
   handleDrawerOpen = () => {
@@ -38,6 +41,7 @@ class ButtonAppBar extends React.Component {
   handleDrawerClose = () => {
     this.setState({ drawerIsOpen: false });
   };
+
 
   render() {
     const { classes } = this.props;
@@ -51,11 +55,16 @@ class ButtonAppBar extends React.Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               Camagru
             </Typography>
+            {this.props.isLoggedIn ? 
+            <Button onClick={this.props.handleLogout} color="inherit">Logout</Button>
+            :
             <Link to="/login" style={{ textDecoration: 'none' , color: 'white'}}><Button color="inherit"><AccountCircle /></Button></Link>
+            }
+      
           </Toolbar>
         </AppBar>
         <Drawer
-          variant="temporarys"
+          variant="temporary"
           
           open={this.state.drawerIsOpen}
         >
@@ -65,10 +74,10 @@ class ButtonAppBar extends React.Component {
             </IconButton>
           </div>
           <div className={classes.drawerInner}>
-            <Link to="/"><Button onClick={this.handleDrawerClose} variant="h6" color="purple">Home</Button></Link>
-            <Link to="/main"><Typography variant="h6"><Button onClick={this.handleDrawerClose} variant="h6" color="purple">Camera</Button></Typography></Link>
-            <Link to="/gallery"><Typography variant="h6"><Button onClick={this.handleDrawerClose} variant="h6" color="primary">Gallery</Button></Typography></Link>
-            <Link to="/show"><Typography variant="h6"><Button onClick={this.handleDrawerClose} variant="h6" color="purple">Show</Button></Typography></Link>
+            <Link to="/"><Button onClick={this.handleDrawerClose} color="inherit">Home</Button></Link>
+            <Link to="/main"><Typography variant="h6"><Button onClick={this.handleDrawerClose} color="primary">Camera</Button></Typography></Link>
+            <Link to="/gallery"><Typography variant="h6"><Button onClick={this.handleDrawerClose} color="primary">Gallery</Button></Typography></Link>
+            <Link to="/show"><Typography variant="h6"><Button onClick={this.handleDrawerClose} color="primary">Show</Button></Typography></Link>
           </div>
         </Drawer>
       </div>

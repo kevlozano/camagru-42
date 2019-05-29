@@ -8,7 +8,7 @@ class Filter extends React.Component {
 
     render() {
         return (
-            <img className="filter-img" src={this.props.filterSrc}></img>
+            <img alt="filter" className="filter-img" src={this.props.filterSrc}></img>
         );
     }
   }

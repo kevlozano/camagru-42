@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
+import axios from 'axios';
+import { Redirect, withRouter } from 'react-router-dom'; 
 
 // do handle submit function
 
@@ -33,6 +35,52 @@ class Login extends React.Component {
         this.setState({ [name]: event.target.checked });
     };
 
+    handleSubmit = (e) => {
+    //login
+      e.preventDefault();
+      if (this.state.checkedA) {
+        let name = e.target.name.value;
+        console.log("1");
+          axios.post('http://localhost:4000/users/login/', {
+            username: e.target.name.value,
+            password: e.target.password.value
+          })
+          .then(function(response) {
+              console.log(response.data);
+              if (response.data) {
+                document.cookie = "userId=" + response.data; 
+              }
+              else
+                console.log("wrong username or password");
+          })
+          .catch(function(err) {
+              console.log(err);
+          });
+        this.props.handleLogin();
+        this.props.history.push('/main');
+      }
+      else {
+        axios.post('http://localhost:4000/users/add/', {
+            username: e.target.name.value,
+            email: e.target.email.value,
+            password: e.target.password.value
+        })
+        .then(function(response) {
+            console.log(response);
+        })
+        .catch(function(err) {
+            console.log(err);
+        })
+        this.setState({
+            checkedA: true,
+            name: e.target.name.value,
+            email: e.target.email.value,
+            password: e.target.password.value
+        });
+      }
+    };
+
+
     render() {
         const { classes } = this.props;
         return(
@@ -51,24 +99,25 @@ class Login extends React.Component {
                         {this.state.checkedA ? "Even easier" : "Its easy"}
                         </Typography>
                         <form onSubmit={this.handleSubmit} className={classes.container} noValidate autoComplete="off">
-                            {this.state.checkedA ? "" : <TextField
-                            id="standard-name"
+                            <TextField
+                            id="name"
                             label="Name"
                             className={classes.textField}
                             placeholder={this.state.name}
                             onChange={this.handleChange('name')}
                             margin="normal"
-                            /> }
+                            />
+                            {this.state.checkedA ? "" : 
                             <TextField
-                            id="standard-required"
+                            id="email"
                             label="Email"
                             className={classes.textField}
                             value={this.state.email}
                             onChange={this.handleChange('email')}
                             margin="normal"
-                            />
+                            /> }
                             <TextField
-                            id="standard-password-input"
+                            id="password"
                             label="Password"
                             className={classes.textField}
                             type="password"
@@ -84,4 +133,4 @@ class Login extends React.Component {
     }
 }
 
-export default withStyles(styles)(Login);
+export default withRouter(withStyles(styles)(Login));

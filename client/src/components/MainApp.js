@@ -28,50 +28,55 @@ class MainApp extends React.Component {
   };
   
   handleClickTakePic = () => {
-   
-    let c = document.getElementById('videocanv');
-    c.style.opacity = "1";
-    let ctx = c.getContext("2d");
-    ctx.clearRect(0,0, c.width, c.height);
-    
-    if (this.state.isFilterOn) {
-      if (!this.state.isVideoOn) {
-        var img2 = new Image();
-        img2.src = this.state.file;
-        ctx.drawImage(img2, 0, 0, 290, 120);
-      }
-      else {
-        let video = document.querySelector('video');
-        ctx.drawImage(video,  0, 0, 280, 115); 
-      }
-      setTimeout(() => {
-        var img = new Image ();
-        img.src = this.state.filterSrc;
-        ctx.drawImage(img,  0, 0, 280, 115); 
-      }, 0);
+    if (!this.props.isLoggedIn) {
+      alert("Please Login like a normal human beign");
     }
     else {
-      if (!this.state.isVideoOn) {
-        var img2 = new Image();
-        img2.src = this.state.file;
-        ctx.drawImage(img2, 0, 0, 290, 120);
+      let c = document.getElementById('videocanv');
+      c.style.opacity = "1";
+      let ctx = c.getContext("2d");
+      ctx.clearRect(0,0, c.width, c.height);
+    
+      if (this.state.isFilterOn) {
+        if (!this.state.isVideoOn) {
+          var img2 = new Image();
+          img2.src = this.state.file;
+          ctx.drawImage(img2, 0, 0, 290, 120);
+        }
+        else {
+          let video = document.querySelector('video');
+          ctx.drawImage(video,  0, 0, 280, 115); 
+        }
+        setTimeout(() => {
+          var img = new Image ();
+          img.src = this.state.filterSrc;
+          ctx.drawImage(img,  0, 0, 280, 115); 
+        }, 0);
       }
       else {
-        let video = document.querySelector('video');
-        ctx.drawImage(video,  0, 0, 280, 115); 
+        if (!this.state.isVideoOn) {
+          var img2 = new Image();
+          img2.src = this.state.file;
+          ctx.drawImage(img2, 0, 0, 290, 120);
+        }
+        else {
+          let video = document.querySelector('video');
+          ctx.drawImage(video,  0, 0, 280, 120); 
+        }
       }
+    this.setState(state => ({
+      isFilterOn: false,
+      isVideoOn: false,
+      readyToDownload: true,
+      file: null 
+  }));
     }
-  this.setState(state => ({
-    isFilterOn: false,
-    isVideoOn: false,
-    readyToDownload: true,
-    file: null 
-}));
-  }
+    
+}
 
   handleUploadFinalImage = () => {
     let c = document.getElementById('videocanv');
-    let finalImage = c.toDataURL();
+    let finalImage = c.toDataURL("image/png");
     var cookieUser = document.cookie.match(/^(.*;)?\s*userId\s*=\s*[^;]+(.*)?$/);
     cookieUser = cookieUser[0].split('=')[1];
 

@@ -11,9 +11,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
-  Redirect,
-  withRouter
 } from "react-router-dom";
 
 const theme = createMuiTheme({
@@ -27,25 +24,46 @@ const theme = createMuiTheme({
 });
 
 class App extends React.Component {
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+      user: ""
+    };
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+
+  }
+
+  handleLogin() {
+    this.setState(
+      { isLoggedIn: true }
+    );
+  };
+  handleLogout() {
+    document.cookie = "userId" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    this.setState(
+      { isLoggedIn: false }
+    );
+  };
 
   render() {
     return (
       <MuiThemeProvider theme={theme}>
         <Router>
           <div>
-            <NavBar />
-            <Route exact path="/" component={Home} />
-            <Route path="/main" component={MainApp} />
-            <Route path="/Login" component={Login} />
-            <Route path="/gallery" component={Gallery} />
-            <Route path="/show" component={ImgShow} />
+            <NavBar isLoggedIn={this.state.isLoggedIn} handleLogout={this.handleLogout} />
+            <Route exact path="/" render={() => <Home isLoggedIn={this.state.isLoggedIn} />} />
+            <Route path="/main" render={() => <MainApp isLoggedIn={this.state.isLoggedIn}/>} />
+            <Route path="/login" render={() => <Login handleLogin={this.handleLogin} />} />
+            <Route path="/gallery" render={() => <Gallery isLoggedIn={this.state.isLoggedIn} />} />
+            <Route path="/show" render={() => <ImgShow isLoggedIn={this.state.isLoggedIn} />} />
           </div>
         </Router>
       </MuiThemeProvider>
     );
   }
-  
+
 }
 
 export default App;

@@ -13,7 +13,9 @@
   "author": "klozano-",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "express": "^4.17.0",
     "mongoose": "^5.5.11",

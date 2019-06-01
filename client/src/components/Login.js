@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -7,8 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
 import axios from 'axios';
-import { Redirect, withRouter } from 'react-router-dom'; 
-
+import { withRouter, Link } from 'react-router-dom'; 
+import ForgotPassword from './ForgotPassword';
 // do handle submit function
 
 const styles = theme => ({
@@ -22,7 +21,7 @@ const styles = theme => ({
 class Login extends React.Component {
 
     state = {
-        name: 'Mango',
+        name: 'Your name',
         email: '',
         checkedA: false,
         multiline: 'Controlled',
@@ -38,9 +37,9 @@ class Login extends React.Component {
     handleSubmit = (e) => {
     //login
       e.preventDefault();
-      if (this.state.checkedA) {
-        let name = e.target.name.value;
-        console.log("1");
+      e.persist();
+      var self = this;
+      if (this.state.checkedA) {  
           axios.post('http://localhost:4000/users/login/', {
             username: e.target.name.value,
             password: e.target.password.value
@@ -48,18 +47,22 @@ class Login extends React.Component {
           .then(function(response) {
               console.log(response.data);
               if (response.data) {
-                document.cookie = "userId=" + response.data; 
+                document.cookie = "userId=" + response.data;
+                self.authLogin();
               }
-              else
+              else {
                 console.log("wrong username or password");
+                alert("WRONG USERNAME OR PASSWORD TRY AGAIN AND TRY HARDER");
+              }
           })
           .catch(function(err) {
               console.log(err);
+              alert("Something went wrong oops try again");
           });
-        this.props.handleLogin();
-        this.props.history.push('/main');
       }
       else {
+        let email = e.target.email.value;
+        var self = this;
         axios.post('http://localhost:4000/users/add/', {
             username: e.target.name.value,
             email: e.target.email.value,
@@ -67,26 +70,41 @@ class Login extends React.Component {
         })
         .then(function(response) {
             console.log(response);
+            self.setState({
+              checkedA: true,
+              name: e.target.name.value,
+              email: e.target.email.value,
+              password: e.target.password.value
+          });
+          self.sendEmail(email);
         })
         .catch(function(err) {
             console.log(err);
+            alert('Wrong username or password format plase try again');
         })
-        this.setState({
-            checkedA: true,
-            name: e.target.name.value,
-            email: e.target.email.value,
-            password: e.target.password.value
-        });
       }
     };
 
+    authLogin = () => {
+      this.props.handleLogin();
+      this.props.history.push('/main');
+    }
+
+    sendEmail = (email) => {
+      console.log(email);
+      axios.post('http://localhost:4000/posts/email', {
+          email: email,
+          subject: 'W E L C O M E',
+          text: "please go to this link to validate your account: http://localhost:3000/login/validation5467896" 
+      });
+  }
 
     render() {
         const { classes } = this.props;
         return(
             <div className="Login">
-                <div className="paperThing">
-                    <Paper className={classes.root} elevation={1}>
+              <div className="paperThing">
+                    {this.props.isLoggedIn ? <Typography variant="h5" color="primary" component="h3">You're logged in</Typography>: <Paper className={classes.root} elevation={1}>
                     <Switch
                         checked={this.state.checkedA}
                         onChange={this.handleCheck('checkedA')}
@@ -126,8 +144,11 @@ class Login extends React.Component {
                             />
                             <Button type="submit" variant="contained" className={classes.button} color="secondary"> {this.state.checkedA ? "Login" : "Sign up"}</Button>
                         </form>
-                    </Paper>
-                </div>
+                        
+                    </Paper>}
+                    <Link to='/forgot'>Forgot password?</Link>
+                  </div>
+                  
             </div>
         );
     }

@@ -11,14 +11,17 @@ userRoutes.route('/login').post(function(req, res) {
             res.send("err: " + err);
         else {
             let psswd = req.body.password;
-            if (bcrypt.compareSync(psswd, user.password)) {
-                console.log("user and password good");
-                res.send(user.id);
+            if (user) {
+                if (bcrypt.compareSync(psswd, user.password)) {
+                    console.log("user and password good");
+                    res.send(user.id);
+                }
+                else
+                    res.send("false");
             }
             else {
                 res.send("false");
-                }
-                
+            }
         }
     });
 });
@@ -37,7 +40,32 @@ userRoutes.route('/').get(function(req, res) {
 userRoutes.route('/:id').get(function(req, res) {
     let id = req.params.id;
     User.findById(id, function(err, user) {
-        res.json(user);
+        if(err)
+            res.send(err)
+        else
+            res.json(user);
+    });
+});
+
+userRoutes.route('/forgot').post(function(req, res) {
+    let email = req.body.email;
+    User.findOne({'email' : new RegExp(email)}, function(err, user) {
+        if (err)
+            res.send("err: " + err);
+        else {
+            let temp = "859746521temporary" + Math.floor((Math.random() * 10000) + 1);
+            let psswd = bcrypt.hashSync(temp, 10, function(err, hash) {
+                if (err)
+                    res.send("err hashing: " + err);
+            });
+            user.password = psswd;
+            user.save().then(user => {
+                res.send(temp);
+            })
+            .catch(err => {
+                res.status(400).send("update not possible due to " + err);
+            });
+        }
     });
 });
 
@@ -56,6 +84,7 @@ userRoutes.route('/add').post(function(req, res) {
     })
     .catch(err => {
         res.status(400).send('adding new user failed due to ' + err);
+        console.log(err.response);
     });
 });
 
@@ -65,12 +94,17 @@ userRoutes.route('/update/:id').post(function(req, res) {
         if(!user)
             res.status(404).send('User not found');
         else {
+            let psswd = bcrypt.hashSync(req.body.password, 10, function(err, hash) {
+                if (err)
+                    "false"
+            });
+            console.log(psswd);
             user.username = req.body.username;
-            user.password = req.body.password;
+            user.password = psswd;
             user.email = req.body.email;
 
             user.save().then(user => {
-                res.json(user);
+                res.status(200).send("worked");
             })
             .catch(err => {
                 res.status(400).send("update not possible due to " + err);

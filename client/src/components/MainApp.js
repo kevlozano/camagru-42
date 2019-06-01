@@ -19,7 +19,7 @@ class MainApp extends React.Component {
   }
 
   componentDidMount() {
-    let cookieUser = document.cookie.match(/^(.*;)?\s*username\s*=\s*[^;]+(.*)?$/);
+    let cookieUser = document.cookie.match(/^(.*;)?\s*userId\s*=\s*[^;]+(.*)?$/);
     if(cookieUser) {
       this.setState({
         loggedIn: true

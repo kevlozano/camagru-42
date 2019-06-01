@@ -12,6 +12,8 @@ import {
   BrowserRouter as Router,
   Route,
 } from "react-router-dom";
+import ForgotPassword from './components/ForgotPassword';
+import ChangeStuff from './components/ChangeStuff';
 
 const theme = createMuiTheme({
   palette: {
@@ -28,17 +30,41 @@ class App extends React.Component {
     super(props);
     this.state = {
       isLoggedIn: false,
-      user: ""
+      imgId: "",
+      userId: ""
     };
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
 
   }
 
+  componentDidMount() {
+    var cookieUser = document.cookie.match(/^(.*;)?\s*userId\s*=\s*[^;]+(.*)?$/);
+    if (cookieUser) {
+      cookieUser = cookieUser[0].split('=')[1];
+    }
+    if (cookieUser) {
+      this.setState(
+        { isLoggedIn: true ,
+          userId: cookieUser
+        }
+      );
+      console.log(cookieUser);
+    }
+  }
+
   handleLogin() {
-    this.setState(
-      { isLoggedIn: true }
-    );
+    var cookieUser = document.cookie.match(/^(.*;)?\s*userId\s*=\s*[^;]+(.*)?$/);
+    if (cookieUser) {
+      cookieUser = cookieUser[0].split('=')[1];
+    }
+    if (cookieUser) {
+      this.setState(
+        { isLoggedIn: true ,
+          userId: cookieUser
+        }
+      );
+    }
   };
   handleLogout() {
     document.cookie = "userId" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -46,6 +72,12 @@ class App extends React.Component {
       { isLoggedIn: false }
     );
   };
+
+  handleClickImgShow = (id) => {
+    this.setState(
+      {imgId : id}
+    );
+  }
 
   render() {
     return (
@@ -55,9 +87,11 @@ class App extends React.Component {
             <NavBar isLoggedIn={this.state.isLoggedIn} handleLogout={this.handleLogout} />
             <Route exact path="/" render={() => <Home isLoggedIn={this.state.isLoggedIn} />} />
             <Route path="/main" render={() => <MainApp isLoggedIn={this.state.isLoggedIn}/>} />
-            <Route path="/login" render={() => <Login handleLogin={this.handleLogin} />} />
-            <Route path="/gallery" render={() => <Gallery isLoggedIn={this.state.isLoggedIn} />} />
-            <Route path="/show" render={() => <ImgShow isLoggedIn={this.state.isLoggedIn} />} />
+            <Route path="/login" render={() => <Login handleLogin={this.handleLogin} isLoggedIn={this.state.isLoggedIn} />} />
+            <Route path="/gallery" render={() => <Gallery isLoggedIn={this.state.isLoggedIn} handleClick={this.handleClickImgShow}/>} />
+            <Route path="/show" render={() => <ImgShow isLoggedIn={this.state.isLoggedIn} imgId={this.state.imgId}/>} userId={this.state.userId}/>
+            <Route path="/forgot" render={() => <ForgotPassword isLoggedIn={this.state.isLoggedIn} imgId={this.state.imgId}/>} userId={this.state.userId}/>
+            <Route path="/change" render={() => <ChangeStuff isLoggedIn={this.state.isLoggedIn} imgId={this.state.imgId}/>} userId={this.state.userId}/>
           </div>
         </Router>
       </MuiThemeProvider>

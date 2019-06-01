@@ -27,4 +27,14 @@ commentRoutes.route('/add').post(function(req, res) {
     });
 });
 
+commentRoutes.route('/img/:imgid').get(function(req, res) {
+    let imgid = req.params.imgid;
+    Comment.find({'imgid': imgid}, function(err, comment) {
+        if(err)
+            res.send(err);
+        else
+            res.json(comment);
+    });
+});
+
 module.exports = commentRoutes;

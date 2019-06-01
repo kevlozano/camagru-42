@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import ButtonP from './Button';
+import ImgOfGallery from './ImgOfGallery';
+import {Redirect} from 'react-router-dom';
 
 // api call need to be added
 
@@ -28,30 +28,44 @@ class Gallery extends React.Component {
     super(props);
     this.state = {
       img0: "",
+      id0: "",
       img1: "",
+      id1: "",
       img2: "",
+      id2: "",
       img3: "",
+      id3: "",
       img4: "",
+      id4: "",
       img5: "",
+      id5: "",
       img6: "",
+      id6: "",
       page: 0,
     };
   }
 
   fillUpGallery = (res, i) => {
     var imgsSrc = [];
-    let j = i+5;
+    var imgsId = [];
+    let j = i+6;
     let x = 0;
     for(i; i < j; i++) {
       console.log(i);
       let src = res.data[i].media;
+      let id = res.data[i]._id;
+      console.log(id);
       imgsSrc[i] = src;
+      imgsId[i] = id;
+      let idId = "id" + x;
       let img = "img" + x;
       this.setState({
         [img] : imgsSrc[i],
+        [idId] : imgsId[i]
       });
       x++;
     }
+    console.log(imgsId);
   };
   getInfoPics = () => {
     console.log("getting info");
@@ -78,22 +92,25 @@ class Gallery extends React.Component {
         <div className={classes.root}>
           <Grid container spacing={24}>
             <Grid item xs={12} sm={6}>
-              <img src={this.state.img0}></img>
+              <ImgOfGallery src={this.state.img0} imgId={this.state.id0} handleClick={this.props.handleClick}/>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <img src={this.state.img1}></img>
+              <ImgOfGallery src={this.state.img1} imgId={this.state.id1} handleClick={this.props.handleClick}/>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <img src={this.state.img2}></img>
+              <ImgOfGallery src={this.state.img2} imgId={this.state.id2} handleClick={this.props.handleClick}/>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <img src={this.state.img3}></img>
+              <ImgOfGallery src={this.state.img3} imgId={this.state.id3} handleClick={this.props.handleClick}/>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <img src={this.state.img4}></img>
+              <ImgOfGallery src={this.state.img4} imgId={this.state.id4} handleClick={this.props.handleClick}/>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <img src={this.state.img5}></img>
+              <ImgOfGallery src={this.state.img5} imgId={this.state.id5} handleClick={this.props.handleClick}/>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <ImgOfGallery src={this.state.img6} imgId={this.state.id6} handleClick={this.props.handleClick}/>
             </Grid>
           </Grid>
         </div>

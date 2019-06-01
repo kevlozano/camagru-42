@@ -23,6 +23,23 @@
   to {opacity: 1;}
 }
 
+@keyframes like {
+  from {color: gray;}
+  to {color: #9c27b0;}
+}
+
+.notLiked {
+  float: right;
+  color: gray;
+}
+
+.liked {
+  float: right;
+  color: #9c27b0;
+  -webkit-animation-name: like;
+  -webkit-animation-duration: 1s;
+}
+
 .comment {
   background-color:#e9e5ea;
   border-radius: 11px;
@@ -35,8 +52,11 @@
 }
 
 .btnGrid {
-  margin-top: 5%;
-  width: 60%
+  width: 30vw;
+  border-radius: 12px;
+  height: 10vw;
+  color: white;
+  background-color: #9c27b0;
 }
 
 .Login {

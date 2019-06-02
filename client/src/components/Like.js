@@ -1,18 +1,6 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
 import ThumbUp from '@material-ui/icons/ThumbUp';
-import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-
-
-const styles = theme => ({
-    button: {
-        margin: theme.spacing(1),
-      },
-      input: {
-        display: 'none',
-    },
-});
 
 class Like extends React.Component {
     constructor(props) {

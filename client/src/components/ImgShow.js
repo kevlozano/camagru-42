@@ -78,23 +78,23 @@ class ImgShow extends React.Component {
       <div className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}><img src={this.state.imgData}></img>
-            <Typography color="primary" variant="h7" component="h3">
+            <Paper className={classes.paper}><img alt="very funny" src={this.state.imgData}></img>
+            <Typography color="primary" variant="h5" component="h3">
                     {this.state.username} <Like userId={this.props.userId} imgId={this.props.imgId} isLoggedIn={this.props.isLoggedIn} />
                 </Typography>
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Paper className={classes.paper}>
-                <Typography color="primary" variant="h7" component="h3">
+                <Typography color="primary" variant="h5" component="h3">
                     comments
                 </Typography>
+                <Comment imgId={this.props.imgId} number="0"/>
                 <Comment imgId={this.props.imgId} number="1"/>
-                <Comment imgId={this.props.imgId} number="2"/>
+                { this.state.button ? "" : <Comment imgId={this.props.imgId} number="2"/>}
                 { this.state.button ? "" : <Comment imgId={this.props.imgId} number="3"/>}
                 { this.state.button ? "" : <Comment imgId={this.props.imgId} number="4"/>}
                 { this.state.button ? "" : <Comment imgId={this.props.imgId} number="5"/>}
-                { this.state.button ? "" : <Comment imgId={this.props.imgId} number="6"/>}
                 <Button onClick={this.handleClickMore} className={classes.button} color="secondary">{this.state.button ? "More" : "Less"}</Button>
                 <CommentIt imgId={this.props.imgId} userId={this.state.userId}/>
             </Paper>

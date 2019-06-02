@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
 import axios from 'axios';
 import { withRouter, Link } from 'react-router-dom'; 
-import ForgotPassword from './ForgotPassword';
 // do handle submit function
 
 const styles = theme => ({
@@ -62,7 +61,7 @@ class Login extends React.Component {
       }
       else {
         let email = e.target.email.value;
-        var self = this;
+        self = this;
         axios.post('http://localhost:4000/users/add/', {
             username: e.target.name.value,
             email: e.target.email.value,

@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import ButtonP from './Button';
 import ImgOfGallery from './ImgOfGallery';
-import {Redirect} from 'react-router-dom';
 
 // api call need to be added
 
@@ -48,10 +47,9 @@ class Gallery extends React.Component {
   fillUpGallery = (res, i) => {
     var imgsSrc = [];
     var imgsId = [];
-    let j = i+6;
+    let j = i+7;
     let x = 0;
     for(i; i < j; i++) {
-      console.log(i);
       let src = res.data[i].media;
       let id = res.data[i]._id;
       console.log(id);
@@ -65,7 +63,6 @@ class Gallery extends React.Component {
       });
       x++;
     }
-    console.log(imgsId);
   };
   getInfoPics = () => {
     console.log("getting info");

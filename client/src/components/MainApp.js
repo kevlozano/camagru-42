@@ -39,7 +39,7 @@ class MainApp extends React.Component {
     
       if (this.state.isFilterOn) {
         if (!this.state.isVideoOn) {
-          var img2 = new Image();
+          let img2 = new Image();
           img2.src = this.state.file;
           ctx.drawImage(img2, 0, 0, 290, 120);
         }
@@ -55,7 +55,7 @@ class MainApp extends React.Component {
       }
       else {
         if (!this.state.isVideoOn) {
-          var img2 = new Image();
+          let img2 = new Image();
           img2.src = this.state.file;
           ctx.drawImage(img2, 0, 0, 290, 120);
         }

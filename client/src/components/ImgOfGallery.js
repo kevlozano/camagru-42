@@ -9,8 +9,8 @@ class ImgOfGallery extends React.Component {
 
     render() {
         return (
-        <Link to='/show/123'>
-            <img imgId={this.props.imgId} src={this.props.src} onClick={this.handleClickHere}></img>
+        <Link to='/show/'>
+            <img alt="created by user" imgid={this.props.imgId} src={this.props.src} onClick={this.handleClickHere}></img>
         </Link>
         
         );

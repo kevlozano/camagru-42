@@ -7,7 +7,10 @@ class Camera extends React.Component {
       if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
           navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
               video.srcObject = stream;
-              video.play();
+              video.pause();
+              setTimeout(function () {      
+                video.play();
+             }, 150);
           });
       }
     };
@@ -24,7 +27,7 @@ class Camera extends React.Component {
   render() {
     return (
       <div width="100%" className="video">
-        {this.props.isVideoOn ? <video id="video" width="100%" autoPlay></video> : <img alt="image uploaded" className="uploadedImg" src={this.props.src}></img>}
+        {this.props.isVideoOn ? <video id="video" width="100%" autoPlay></video> : <img alt="uploaded" className="uploadedImg" src={this.props.src}></img>}
       </div>
     );
   }

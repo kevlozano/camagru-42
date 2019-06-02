@@ -22,6 +22,17 @@ const theme = createMuiTheme({
   },
   fabPadding: {
     padding: '100px',
+  },
+  typography: {
+    fontFamily: [
+      "Roboto",
+      "-apple-system",
+      "BlinkMacSystemFont",
+      "Segoe UI",
+      "Arial",
+      "sans-serif"
+    ].join(","),
+    useNextVariants: true
   }
 });
 
@@ -49,7 +60,6 @@ class App extends React.Component {
           userId: cookieUser
         }
       );
-      console.log(cookieUser);
     }
   }
 
@@ -67,7 +77,7 @@ class App extends React.Component {
     }
   };
   handleLogout() {
-    document.cookie = "userId" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = "userId=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     this.setState(
       { isLoggedIn: false }
     );

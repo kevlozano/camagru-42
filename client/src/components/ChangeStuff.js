@@ -44,7 +44,8 @@ class Login extends React.Component {
                 axios.post('http://localhost:4000/users/update/' + cookieUser, {
                 username: e.target.name.value,
                 email: e.target.email.value,
-                password: e.target.password.value
+                password: e.target.password.value,
+                receiveEmails: e.target.emails.value
                 })
                 .then((response) => {
                     console.log(response);
@@ -69,10 +70,11 @@ class Login extends React.Component {
                         <Typography variant="h5" color="primary" component="h3">
                         Change stuff
                         </Typography>
-                        <Typography component="p">
-                        Its easy
-                        </Typography>
                         <form onSubmit={this.handleSubmit} className={classes.container} noValidate autoComplete="off">
+                            <Typography component="p">
+                            No Emails? <input type="checkbox" name="sports" id="emails"  />
+                            </Typography>
+                            <br />
                             <TextField
                             id="name"
                             label="Name"

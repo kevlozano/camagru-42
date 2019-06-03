@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 import ForgotPassword from './components/ForgotPassword';
 import ChangeStuff from './components/ChangeStuff';
+import Validate from './components/Validate';
 
 const theme = createMuiTheme({
   palette: {
@@ -98,6 +99,7 @@ class App extends React.Component {
             <Route exact path="/" render={() => <Home isLoggedIn={this.state.isLoggedIn} />} />
             <Route path="/main" render={() => <MainApp isLoggedIn={this.state.isLoggedIn}/>} />
             <Route path="/login" render={() => <Login handleLogin={this.handleLogin} isLoggedIn={this.state.isLoggedIn} />} />
+            <Route path="/val" render={() => <Validate />} />
             <Route path="/gallery" render={() => <Gallery isLoggedIn={this.state.isLoggedIn} handleClick={this.handleClickImgShow}/>} />
             <Route path="/show" render={() => <ImgShow isLoggedIn={this.state.isLoggedIn} imgId={this.state.imgId}/>} userId={this.state.userId}/>
             <Route path="/forgot" render={() => <ForgotPassword isLoggedIn={this.state.isLoggedIn} imgId={this.state.imgId}/>} userId={this.state.userId}/>

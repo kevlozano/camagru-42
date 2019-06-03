@@ -77,7 +77,7 @@ class ButtonAppBar extends React.Component {
             <Link to="/"><Button onClick={this.handleDrawerClose} color="inherit">Home</Button></Link>
             <Link to="/main"><Typography variant="h6"><Button onClick={this.handleDrawerClose} color="primary">Camera</Button></Typography></Link>
             <Link to="/gallery"><Typography variant="h6"><Button onClick={this.handleDrawerClose} color="primary">Gallery</Button></Typography></Link>
-            <Link to="/show"><Typography variant="h6"><Button onClick={this.handleDrawerClose} color="primary">Show</Button></Typography></Link>
+            <Link to="/change"><Typography variant="h6"><Button onClick={this.handleDrawerClose} color="primary">Change settings</Button></Typography></Link>
           </div>
         </Drawer>
       </div>

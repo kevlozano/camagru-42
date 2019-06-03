@@ -51,7 +51,7 @@ class Login extends React.Component {
               }
               else {
                 console.log("wrong username or password");
-                alert("WRONG USERNAME OR PASSWORD TRY AGAIN AND TRY HARDER");
+                alert("VALIDATE! ALSO CHECK USERNAME AND PASSWORD");
               }
           })
           .catch(function(err) {
@@ -61,6 +61,7 @@ class Login extends React.Component {
       }
       else {
         let email = e.target.email.value;
+        let username = e.target.username.value;
         self = this;
         axios.post('http://localhost:4000/users/add/', {
             username: e.target.name.value,
@@ -75,7 +76,7 @@ class Login extends React.Component {
               email: e.target.email.value,
               password: e.target.password.value
           });
-          self.sendEmail(email);
+          self.sendEmail(email, username);
         })
         .catch(function(err) {
             console.log(err);
@@ -89,12 +90,12 @@ class Login extends React.Component {
       this.props.history.push('/main');
     }
 
-    sendEmail = (email) => {
+    sendEmail = (email, username) => {
       console.log(email);
       axios.post('http://localhost:4000/posts/email', {
           email: email,
           subject: 'W E L C O M E',
-          text: "please go to this link to validate your account: http://localhost:3000/login/validation5467896" 
+          text: "please go to this link to validate your account: http://localhost:3000/val/?" + username + '#' + Math.floor((Math.random() * 1000) + 1) 
       });
   }
 

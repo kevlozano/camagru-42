@@ -11,7 +11,7 @@ userRoutes.route('/login').post(function(req, res) {
             res.send("err: " + err);
         else {
             let psswd = req.body.password;
-            if (user) {
+            if (user.isValidated) {
                 if (bcrypt.compareSync(psswd, user.password)) {
                     console.log("user and password good");
                     res.send(user.id);
@@ -22,6 +22,23 @@ userRoutes.route('/login').post(function(req, res) {
             else {
                 res.send("false");
             }
+        }
+    });
+});
+
+userRoutes.route('/val/:username').post(function(req, res) {
+    let username = req.params.username;
+    User.findOne({'username' : new RegExp(username)}, function(err, user) {
+        if (err)
+            res.send("err: " + err);
+        else {
+            user.isValidated = true;
+            user.save().then(user => {
+                res.send('validated');
+            })
+            .catch(err => {
+                res.status(400).send("update not possible due to " + err);
+            });
         }
     });
 });
@@ -102,6 +119,7 @@ userRoutes.route('/update/:id').post(function(req, res) {
             user.username = req.body.username;
             user.password = psswd;
             user.email = req.body.email;
+            user.receiveEmails = req.body.receiveEmails;
 
             user.save().then(user => {
                 res.status(200).send("worked");

@@ -31,7 +31,8 @@ class ImgShow extends React.Component {
       userId: "",
       username: "",
       imgData: "",
-      button: true
+      button: true,
+      delete: false,
     };
   }
 
@@ -43,8 +44,10 @@ class ImgShow extends React.Component {
           imgData: response.data.media,
           userId: response.data.userId,
           likes: response.data.likes,
+          imgId: response.data._id,
         });
         this.getUsername();
+        this.checkDelete();
     })
     .catch(function(err){
       console.log(err);
@@ -71,6 +74,30 @@ class ImgShow extends React.Component {
     }));
   }
   
+  checkDelete = () => {
+    console.log(this.state.userId);
+    var cookieUser = document.cookie.match(/^(.*;)?\s*userId\s*=\s*[^;]+(.*)?$/);
+    if (cookieUser) {
+        let currentUserId = cookieUser[0].split('=')[1];
+        console.log(currentUserId);
+        if (currentUserId === this.state.userId) {
+          this.setState({
+            delete: true
+          });
+        }
+    }
+  }
+
+  deleteImage = () => {
+    console.log("AAAA: " +this.state.imgId);
+    axios.delete('http://localhost:4000/posts/delete/' + this.state.imgId)
+    .then((response) => {
+      console.log(response + "deleted!");
+    })
+    .catch((err) => {
+      console.log(err + "failed");
+    })
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -98,6 +125,17 @@ class ImgShow extends React.Component {
                 <Button onClick={this.handleClickMore} className={classes.button} color="secondary">{this.state.button ? "More" : "Less"}</Button>
                 <CommentIt imgId={this.props.imgId} userId={this.state.userId}/>
             </Paper>
+            { this.state.delete ? <Button onClick={this.deleteImage}>Delete Image</Button> : ""}
+            <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=github.com/kevlozano" target="_blank" rel="noopener" aria-label="Share on Facebook">
+              <div className="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--large"><div aria-hidden="true" className="resp-sharing-button__icon resp-sharing-button__icon--solid">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/></svg>
+                </div>Share on Facebook</div>
+            </a>
+            <a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?text=Camagru%20Share" target="_blank" rel="noopener" aria-label="Share on Twitter">
+              <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--large"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--circle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.5 7.4l-2 .2c-.4-.5-1-.8-2-.8C13.3 6.8 12 8 12 9.4v.6c-2 0-4-1-5.4-2.7-.2.4-.3.8-.3 1.3 0 1 .4 1.7 1.2 2.2-.5 0-1 0-1.2-.3 0 1.3 1 2.3 2 2.6-.3.4-.7.4-1 0 .2 1.4 1.2 2 2.3 2-1 1-2.5 1.4-4 1 1.3 1 2.7 1.4 4.2 1.4 4.8 0 7.5-4 7.5-7.5v-.4c.5-.4.8-1.5 1.2-2z"/><circle cx="12" cy="12" r="11.5"/></svg>
+                </div>Share on Twitter</div>
+            </a>
           </Grid>
         </Grid>
       </div>

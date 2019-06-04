@@ -15,6 +15,7 @@ import {
 import ForgotPassword from './components/ForgotPassword';
 import ChangeStuff from './components/ChangeStuff';
 import Validate from './components/Validate';
+import Footer from './components/Footer';
 
 const theme = createMuiTheme({
   palette: {
@@ -104,6 +105,7 @@ class App extends React.Component {
             <Route path="/show" render={() => <ImgShow isLoggedIn={this.state.isLoggedIn} imgId={this.state.imgId}/>} userId={this.state.userId}/>
             <Route path="/forgot" render={() => <ForgotPassword isLoggedIn={this.state.isLoggedIn} imgId={this.state.imgId}/>} userId={this.state.userId}/>
             <Route path="/change" render={() => <ChangeStuff isLoggedIn={this.state.isLoggedIn} imgId={this.state.imgId}/>} userId={this.state.userId}/>
+            <Footer />
           </div>
         </Router>
       </MuiThemeProvider>

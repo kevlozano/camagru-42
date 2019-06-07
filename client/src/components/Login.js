@@ -61,7 +61,7 @@ class Login extends React.Component {
       }
       else {
         let email = e.target.email.value;
-        let username = e.target.username.value;
+        let username = e.target.name.value;
         self = this;
         axios.post('http://localhost:4000/users/add/', {
             username: e.target.name.value,

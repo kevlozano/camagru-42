@@ -6,10 +6,14 @@ const User = require('../models/User.model');
 
 userRoutes.route('/login').post(function(req, res) {
     let username = req.body.username.toLowerCase();
+    console.log(username);
     User.findOne({'username' : new RegExp(username)}, function(err, user) {
-        if (err)
-            res.send("err: " + err);
-        else {
+        if (err) {
+            res.send("false");
+            console.log(err);
+        }
+        else if (user) {
+            console.log("inside else");
             let psswd = req.body.password;
             if (user.isValidated) {
                 if (bcrypt.compareSync(psswd, user.password)) {
@@ -23,6 +27,8 @@ userRoutes.route('/login').post(function(req, res) {
                 res.send("false");
             }
         }
+        else
+            res.send("false");
     });
 });
 
@@ -30,8 +36,8 @@ userRoutes.route('/val/:username').post(function(req, res) {
     let username = req.params.username;
     User.findOne({'username' : new RegExp(username)}, function(err, user) {
         if (err)
-            res.send("err: " + err);
-        else {
+            res.send("false");
+        else if (user) {
             user.isValidated = true;
             user.save().then(user => {
                 res.send('validated');
@@ -40,6 +46,8 @@ userRoutes.route('/val/:username').post(function(req, res) {
                 res.status(400).send("update not possible due to " + err);
             });
         }
+        else
+            res.send("false");
     });
 });
 

@@ -20,6 +20,6 @@
     "express": "^4.17.0",
     "mongoose": "^5.5.11",
     "nodemailer": "^6.2.1",
-    "nodemon": "^1.19.0"
+    "nodemon": "^1.19.2"
   }
 }

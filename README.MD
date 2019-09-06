@@ -66,8 +66,10 @@ Camagru is the first project of the web branch in 42 Silicon Valley. As such, th
 ## Screenshots
 
 <p align="center">
-  <img src="./images/screenshot3.png" height=300px width=auto>
-  <img src="./images/screenshot2.png" height=300px width=auto>
+  <img src="./images/screenshot3.png" height=300px width=auto> |
+  <img src="./images/screenshot2.png" height=300px width=auto> |
+  <img src="./images/screenshot4.png" height=300px width=auto> |
+  <img src="./images/screenshot5.png" height=300px width=auto>
 </p>
 
 ### Prerequisites

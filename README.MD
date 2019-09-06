@@ -27,12 +27,9 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license)
+* [Screenshots](#screenshots)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+* [Article](#articles)
 
 
 

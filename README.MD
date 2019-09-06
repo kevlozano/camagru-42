@@ -5,9 +5,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <iframe src="https://giphy.com/embed/eK0ot0kvF5juFh7XZ4" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/eK0ot0kvF5juFh7XZ4">via GIPHY</a></p>
+  <img src="./images/giphy.gif" height=300px width=auto>
   <h3 align="center">Camagru</h3>
-
+  
   <p align="center">
     An image editing and sharing service written in Javascript
     <br />

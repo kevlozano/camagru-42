@@ -39,8 +39,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-<img src="./images/screenshot.png" height=50px width=auto>
+<img src="./images/screenshot.png" height=300px width=auto>
 
 Camagru is the first project of the web branch in 42 Silicon Valley. As such, the purpose of it is to develop and understand functionalities such as: 
 

@@ -38,9 +38,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-<img src="./images/screenshot.png" height=300px width=auto>
-
+<p align="center">
+  <img src="./images/screenshot.png" height=300px width=auto>
+</p>
 Camagru is the first project of the web branch in 42 Silicon Valley. As such, the purpose of it is to develop and understand functionalities such as: 
 
 * User sign up / login
@@ -63,9 +63,12 @@ Camagru is the first project of the web branch in 42 Silicon Valley. As such, th
 
 
 <!-- GETTING STARTED -->
-## Usage
+## Screenshots
 
-To get a local copy up and running follow these simple steps.
+<p align="center">
+  <img src="./images/screenshot3.png" height=300px width=auto>
+  <img src="./images/screenshot2.png" height=300px width=auto>
+</p>
 
 ### Prerequisites
 

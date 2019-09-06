@@ -5,7 +5,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <img src="./images/giphy.gif" height=300px width=auto>
+  <img src="./images/giphy.gif">
   <h3 align="center">Camagru</h3>
   
   <p align="center">

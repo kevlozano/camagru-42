@@ -5,7 +5,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-
+  <div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/eK0ot0kvF5juFh7XZ4" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/eK0ot0kvF5juFh7XZ4"></a></p>
   <h3 align="center">Camagru</h3>
 
   <p align="center">
@@ -89,7 +89,7 @@ npm install
 <!-- CONTACT -->
 ## Contact
 
-Kev Lozano - [@kevlozano](https://twitter.com/kevlozano) - email
+Kev Lozano - [@kevlozano](https://twitter.com/kevlozano)
 
 Project Link: [https://github.com/kevlozano/camagru-42](https://github.com/kevlozano/camagru-42)
 

@@ -18,7 +18,7 @@
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "express": "^4.17.0",
-    "mongoose": "^5.5.11",
+    "mongoose": "^5.7.5",
     "nodemailer": "^6.2.1",
     "nodemon": "^1.19.2"
   }
